@@ -1,12 +1,9 @@
 #!/bin/bash
 
-echo "cd /workspace"
+mkdir --parents /workspace/src
+cd /workspace/src
 for var in $*; do
-    echo "git clone $var"
+    go get -fix -u $var
 done
 
-for var in $*; do
-    if [ -x /workspace/$var/build.sh ]; then
-        /workspace/$var/build.sh
-    fi
-done
+go install -a ...
