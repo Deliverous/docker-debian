@@ -2,6 +2,8 @@
 
 [ -d /workspace/.ssh ] && cp -a /workspace/.ssh /root/
 
+chown -R root:root /root/.ssh/
+
 for var in $*; do
     go get -fix -u $var
 done
