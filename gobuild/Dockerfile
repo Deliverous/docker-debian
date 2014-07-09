@@ -22,3 +22,4 @@ ADD build /usr/local/bin/build
 RUN chmod 755 /usr/local/bin/build
 
 VOLUME ["/workspace"]
+ENTRYPOINT ["/usr/local/bin/build"]

@@ -1,9 +1,8 @@
 #!/bin/bash
 
-mkdir --parents /workspace/src
-cd /workspace/src
 for var in $*; do
-    go get -fix -u $var
+    go get -fix -u $var >/root/log 2>&1
 done
 
-go install -a ...
+go install -a ... >/root/log 2>&1
+cd /workspace/bin && tar -c * | gzip -f
