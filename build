@@ -1,8 +1,8 @@
 #!/bin/bash
 
 for var in $*; do
-    go get -fix -u $var >/root/log 2>&1
+    go get -fix -u $var
 done
 
-go install -a ... >/root/log 2>&1
-cd /workspace/bin && tar -c * | gzip -f
+go install -a ...
+cp /workspace/bin/* /output

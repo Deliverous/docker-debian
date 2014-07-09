@@ -21,5 +21,5 @@ RUN mkdir /workspace
 ADD build /usr/local/bin/build
 RUN chmod 755 /usr/local/bin/build
 
-VOLUME ["/workspace"]
+VOLUME ["/workspace", "/output"]
 ENTRYPOINT ["/usr/local/bin/build"]
