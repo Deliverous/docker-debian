@@ -8,4 +8,6 @@ To use it, just run :
 
 or 
 
-    docker run -t -i -v /path/to/local/project:/workspace -v /path/to/output:/output deliverous/gobuild deliverous/gobuild
+    docker run -t -i -v /path/to/local/project:/workspace deliverous/gobuild deliverous/gobuild
+
+if /path/to/local/project/.ssh exist, it will be use to do the "go get" command

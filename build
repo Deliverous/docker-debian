@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ -d /workspace/.ssh ] && cp -a /workspace/.ssh /root/
+
 for var in $*; do
     go get -fix -u $var
 done
