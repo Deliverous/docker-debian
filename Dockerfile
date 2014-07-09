@@ -21,5 +21,8 @@ RUN mkdir /workspace
 ADD build /usr/local/bin/build
 RUN chmod 755 /usr/local/bin/build
 
-VOLUME ["/workspace", "/output"]
+# Prepare ssh share space
+RUN mkdir /ssh
+
+VOLUME ["/workspace", "/output", "/ssh"]
 ENTRYPOINT ["/usr/local/bin/build"]

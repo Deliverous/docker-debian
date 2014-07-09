@@ -8,7 +8,11 @@ To use it, just run :
 
 or 
 
-    docker run -t -i -v /path/to/local/project:/workspace deliverous/gobuild deliverous/gobuild
+    docker run -t -i -v /path/to/local/project:/workspace deliverous/gobuild deliverous/gobuild <projects>
+
+or 
+
+    docker run -t -i -v /path/to/.ssh:/ssh deliverous/gobuild deliverous/gobuild <projects>
 
 if /path/to/local/project/.ssh exist, it will be use to do the "go get" command
 the "go get" from git+ssh repository must work from your local machine if you whant to inject it in container. 

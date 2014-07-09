@@ -1,8 +1,9 @@
 #!/bin/bash
 
-[ -d /workspace/.ssh ] && cp -a /workspace/.ssh /root/
+cp -a /ssh /root/.ssh
 
 chown -R root:root /root/.ssh/
+chmod 700 /root/.ssh/
 
 for var in $*; do
     go get -fix -u $var
