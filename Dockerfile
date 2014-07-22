@@ -2,9 +2,8 @@ FROM ubuntu
 MAINTAINER olivier.albiez@deliverous.com
 MAINTAINER thomas.clavier@deliverous.com
 
-RUN apt-get update
-RUN apt-get dist-upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes -q curl build-essential git bzr mercurial
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y curl build-essential git bzr mercurial && apt-get clean
 
 # Install Go
 ENV PATH $PATH:/usr/local/go/bin
