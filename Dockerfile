@@ -1,6 +1,5 @@
 FROM ubuntu
-MAINTAINER olivier.albiez@deliverous.com
-MAINTAINER thomas.clavier@deliverous.com
+MAINTAINER docker@deliverous.com
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y curl build-essential git bzr mercurial && apt-get clean
