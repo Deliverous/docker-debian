@@ -1,0 +1,40 @@
+#!/bin/bash -ex
+LOG=/tmp/build.log
+
+trap end_of_script 1 2 3 6 9 14 15
+
+end_of_script () {
+  [ -n "${1:-}" ] && EXIT="${1}" || EXIT=0
+  [ -n "${2:-}" ] && echo "$2" >&2
+  [ $EXIT -gt 0 ] && cat $LOG >&2
+  exit $EXIT
+}
+
+function update-sshkeys() {
+    cp /ssh/* /root/.ssh/
+    chown -R root:root /root/.ssh
+    chmod 700 /root/.ssh
+}
+
+function git-update() {
+    repository=$1
+    destination="/go/src/$2"
+    tag=$3
+    if [ -e "$destination" ] 
+    then
+        (cd $destination; git fetch --update-head-ok)
+    else
+        git clone --quiet $repository $destination
+    fi
+    (cd $destination; git checkout -f $tag)
+}
+
+update-sshkeys
+
+for entry in $*; do
+    repository=`echo $entry | cut -d";" -f1`
+    path=`echo $entry | cut -d";" -f2`
+    tag=`echo $entry | cut -d";" -f3`
+    git-update $repository $path $tag >$LOG 2>&1 || end_of_script 1 "git update failed"
+    go get $GO_GET_OPTS $path >$LOG 2>&1 || end_of_script 1 "go get failed"
+done
