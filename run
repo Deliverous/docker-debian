@@ -11,9 +11,12 @@ end_of_script () {
 }
 
 function update-sshkeys() {
-    cp /ssh/* /root/.ssh/
-    chown -R root:root /root/.ssh
-    chmod 700 /root/.ssh
+    if [ $(ls /ssh/ | wc -l) -gt 2 ] 
+    then
+      cp /ssh/* /root/.ssh/
+      chown -R root:root /root/.ssh
+      chmod 700 /root/.ssh
+    fi
 }
 
 function git-update() {
@@ -38,3 +41,5 @@ for entry in $*; do
     git-update $repository $path $tag >$LOG 2>&1 || end_of_script 1 "git update failed"
     go get $GO_GET_OPTS $path >$LOG 2>&1 || end_of_script 1 "go get failed"
 done
+
+cd /go/bin && tar -c *
